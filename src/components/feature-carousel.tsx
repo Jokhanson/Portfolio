@@ -118,18 +118,19 @@ export function FeatureCarousel({ items }: { items: FeatureItem[] }) {
                   className="absolute inset-0 rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border-4 border-background bg-background origin-center"
                 >
                   <img src={feature.image} alt={label} loading="lazy" className="w-full h-full object-cover transition-all duration-700" />
+                  <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
                   <AnimatePresence>
                     {isActive && (
                       <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        className="absolute inset-x-0 bottom-0 p-8 pt-24 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end pointer-events-none"
+                        className="absolute inset-x-0 bottom-0 p-8 pt-24 flex flex-col justify-end pointer-events-none"
                       >
-                        <div className="bg-background text-foreground px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.2em] w-fit shadow-lg mb-2 border border-white/10">
+                        <div className="bg-background/80 backdrop-blur-md text-foreground px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.2em] w-fit shadow-lg mb-2 border border-white/10">
                           {index + 1} &bull; {label}
                         </div>
-                        <p className="text-white font-normal text-lg leading-tight drop-shadow-md">
+                        <p className="text-white font-normal text-lg leading-tight drop-shadow-lg">
                           {description}
                         </p>
                       </motion.div>
