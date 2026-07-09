@@ -62,17 +62,17 @@ export function Nav({ scrollTo }: { scrollTo: (id: string) => void }) {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={() => setOpen(false)}
-              className="fixed inset-0 bg-black/60 z-40 md:hidden"
+              className="fixed inset-0 bg-black/80 z-40 md:hidden"
             />
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed top-0 right-0 bottom-0 w-[280px] z-50 bg-zinc-900 border-l border-white/10 flex flex-col md:hidden"
+              className="fixed top-0 right-0 bottom-0 w-[280px] z-50 bg-[#0A0A0F] border-l border-white/[0.12] shadow-[-8px_0_30px_rgba(0,0,0,0.5)] flex flex-col md:hidden"
             >
-              <div className="flex items-center justify-between px-6 h-16 border-b border-white/10">
-                <span className="font-display font-bold">{t("nav.logo")}</span>
+              <div className="flex items-center justify-between px-6 h-16 border-b border-white/[0.08]">
+                <span className="font-display font-bold text-foreground">{t("nav.logo")}</span>
                 <button
                   onClick={() => setOpen(false)}
                   aria-label="Close menu"
@@ -86,13 +86,13 @@ export function Nav({ scrollTo }: { scrollTo: (id: string) => void }) {
                   <button
                     key={key}
                     onClick={() => handleNav(id)}
-                    className="w-full text-left px-4 py-3 rounded-xl text-base text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors capitalize focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#62B2FE]"
+                    className="w-full text-left px-4 py-3 rounded-xl text-base text-foreground hover:text-[#62B2FE] hover:bg-white/[0.06] transition-colors capitalize font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#62B2FE]"
                   >
                     {t(`nav.${key}`)}
                   </button>
                 ))}
               </div>
-              <div className="p-6 border-t border-white/10 space-y-4">
+              <div className="p-6 border-t border-white/[0.08] space-y-4">
                 <button
                   onClick={() => handleNav("contact")}
                   className="w-full px-5 py-3 bg-[#62B2FE] text-white rounded-full text-sm font-medium hover:bg-[#62B2FE]/90 transition-all text-center"
