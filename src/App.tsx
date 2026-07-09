@@ -18,25 +18,25 @@ const PROJECTS: (FeatureItem & { url: string })[] = [
   {
     id: "sustainable",
     icon: Pizza04Icon,
-    image: "https://images.unsplash.com/photo-1554048612-b6a482bc67e5?q=80&w=1200",
+    image: "/Portfolio/photos/FrameByFramePic",
     url: "https://jokhanson.github.io/actual0102/index.html",
   },
   {
     id: "community",
     icon: CommandFreeIcons,
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200",
+    image: "/Portfolio/photos/HourLessonPic",
     url: "https://jokhanson.github.io/hourlesson/",
   },
   {
     id: "global",
     icon: GlobalSearchIcon,
-    image: "https://images.unsplash.com/photo-1513207565459-7d1b1f0cf1b1?q=80&w=1200",
+    image: "/Portfolio/photos/GiftPic",
     url: "https://jokhanson.github.io/Gift-Site/experimental/#/page/4iq4k0p8",
   },
   {
     id: "award",
     icon: CheckmarkCircle01Icon,
-    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200",
+    image: "/Portfolio/photos/PosingPic",
     url: "https://jokhanson.github.io/PosingDemo/",
   },
 ];
