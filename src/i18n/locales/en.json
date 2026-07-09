@@ -55,18 +55,17 @@
     "builtWith": "Built with React, TypeScript, Tailwind & Motion"
   },
   "carousel": {
-    "liveSession": "Live Session",
     "items": {
-      "sustainable": { "label": "1-st Case", "description": "Description of 1-st case" },
-      "community": { "label": "2-nd Case", "description": "Description of 2-nd case" },
-      "global": { "label": "3-rd Case", "description": "Description of 3-rd" },
-      "award": { "label": "4-th Case", "description": "Description of 4-th case" },
-      "cloud": { "label": "5-th Case", "description": "Description of 5-th case" },
-      "mobile": { "label": "6-th Case", "description": "Description of 6-th case" },
-      "analytics": { "label": "7-th Case", "description": "Description of 7-th case" },
-      "security": { "label": "8-th Case", "description": "Description of 8-th case" },
-      "magic": { "label": "9-th Case", "description": "Description of 9-th case" },
-      "local": { "label": "10-th Case", "description": "Description of 10-th case" }
+      "sustainable": { "label": "1st Project", "description": "Sustainable sourcing platform connecting local farmers with consumers." },
+      "community": { "label": "2nd Project", "description": "Community-driven marketplace for shared experiences." },
+      "global": { "label": "3rd Project", "description": "Global network connecting visionaries across borders." },
+      "award": { "label": "4th Project", "description": "Award-winning design system for enterprise applications." },
+      "cloud": { "label": "5th Project", "description": "Cloud infrastructure dashboard with real-time monitoring." },
+      "mobile": { "label": "6th Project", "description": "Mobile-first banking app with biometric security." },
+      "analytics": { "label": "7th Project", "description": "Real-time analytics platform for data-driven decisions." },
+      "security": { "label": "8th Project", "description": "Zero-trust security framework for distributed systems." },
+      "magic": { "label": "9th Project", "description": "AI-powered automation tool for repetitive workflows." },
+      "local": { "label": "10th Project", "description": "Local business discovery engine with community reviews." }
     }
   }
 }

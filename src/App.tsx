@@ -11,10 +11,11 @@ import {
   MagicWandIcon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { ArrowUpRight, MousePointerClick, Send, Mail } from "lucide-react";
+import { ArrowUpRight, MousePointerClick, Send, Mail, ArrowUp } from "lucide-react";
 import { MeshGradient } from "@paper-design/shaders-react";
 import { useTranslation } from "react-i18next";
 import { LanguageToggle } from "@/components/language-toggle";
+import { GitHubIcon, LinkedInIcon } from "@/components/icons";
 
 const FEATURES_DATA = [
   { id: "sustainable", icon: Pizza04Icon, image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=1200" },
@@ -50,8 +51,12 @@ function FeatureCarousel({ items }: { items: typeof FEATURES_DATA }) {
   const nextStep = useCallback(() => setStep((p) => p + 1), []);
 
   const handleChipClick = (index: number) => {
-    const diff = (index - currentIndex + items.length) % items.length;
-    if (diff > 0) setStep((s) => s + diff);
+    const diff = index - currentIndex;
+    const len = items.length;
+    const shortest = diff > 0
+      ? (diff <= len / 2 ? diff : diff - len)
+      : (-diff <= len / 2 ? diff : diff + len);
+    if (shortest !== 0) setStep((s) => s + shortest);
   };
 
   useEffect(() => {
@@ -95,7 +100,7 @@ function FeatureCarousel({ items }: { items: typeof FEATURES_DATA }) {
                     onClick={() => handleChipClick(index)}
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}
-                    className={`relative flex items-center gap-3 px-5 py-2.5 rounded-full transition-all duration-700 text-left group border text-sm ${
+                    className={`relative flex items-center gap-3 px-5 py-2.5 rounded-full transition-all duration-700 text-left border text-sm ${
                       index === currentIndex
                         ? "bg-white text-[#62B2FE] border-white z-10"
                         : "bg-transparent text-white/60 border-white/20 hover:border-white/40 hover:text-white"
@@ -131,12 +136,12 @@ function FeatureCarousel({ items }: { items: typeof FEATURES_DATA }) {
                     opacity: isActive ? 1 : isPrev || isNext ? 0.4 : 0,
                     rotate: isPrev ? -3 : isNext ? 3 : 0,
                     zIndex: isActive ? 20 : isPrev || isNext ? 10 : 0,
-                    pointerEvents: isActive ? "auto" : "none" as const,
+                    pointerEvents: isActive ? "auto" : "none",
                   }}
                   transition={{ type: "spring", stiffness: 260, damping: 25, mass: 0.8 }}
                   className="absolute inset-0 rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border-4 border-background bg-background origin-center"
                 >
-                  <img src={feature.image} alt={label} className="w-full h-full object-cover transition-all duration-700" />
+                  <img src={feature.image} alt={label} loading="lazy" className="w-full h-full object-cover transition-all duration-700" />
                   <AnimatePresence>
                     {isActive && (
                       <motion.div
@@ -172,16 +177,19 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <a href="#main-content" className="fixed left-4 top-4 z-[60] -translate-y-full focus:translate-y-0 transition-transform bg-[#62B2FE] text-white px-4 py-2 rounded-lg text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#62B2FE]">
+        Skip to content
+      </a>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0F]/60 backdrop-blur-2xl border-b border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.3)]">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <span className="font-display text-lg font-bold tracking-tight">{t("nav.logo")}</span>
           <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
             {navItems.map((item) => (
-              <button key={item} onClick={() => scrollTo(item)} className="hover:text-foreground transition-colors capitalize">{t(`nav.${item}`)}</button>
+              <button key={item} onClick={() => scrollTo(item)} className="hover:text-foreground transition-colors capitalize focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#62B2FE] focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded">{t(`nav.${item}`)}</button>
             ))}
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={() => scrollTo("contact")} className="px-5 py-2 bg-[#62B2FE] text-white rounded-full text-sm font-medium hover:bg-[#62B2FE]/90 transition-all">
+            <button onClick={() => scrollTo("contact")} className="px-5 py-2 bg-[#62B2FE] text-white rounded-full text-sm font-medium hover:bg-[#62B2FE]/90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#62B2FE] focus-visible:ring-offset-2 focus-visible:ring-offset-background">
               {t("nav.getInTouch")}
             </button>
             <LanguageToggle />
@@ -189,7 +197,7 @@ export default function App() {
         </div>
       </nav>
 
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+      <section id="main-content" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
         <MeshGradient
           className="absolute inset-0 w-full h-full"
           colors={["#0A0A0F", "#14141E", "#1C1C2E", "#62B2FE"]}
@@ -199,7 +207,7 @@ export default function App() {
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#62B2FE]/10 border border-[#62B2FE]/20 text-[#62B2FE] text-sm font-mono mb-8">
-              <span className="w-2 h-2 rounded-full bg-[#62B2FE] shadow-[0_0_8px_#62B2FE]" />
+              <span className="w-2 h-2 rounded-full bg-[#62B2FE] shadow-[0_0_8px_#62B2FE]" aria-hidden="true" />
               {t("hero.available")}
             </div>
           </motion.div>
@@ -220,10 +228,10 @@ export default function App() {
             </button>
           </motion.div>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.7 }} className="mt-20 flex items-center justify-center gap-8 text-xs text-muted-foreground font-mono">
-            {(t("hero.techs", { returnObjects: true }) as string[]).map((tech: string, i: number, arr: string[]) => (
+            {(t("hero.techs", { returnObjects: true }) as string[]).map((tech: string, i: number) => (
               <span key={tech}>
                 {tech}
-                {i < arr.length - 1 && <span className="ml-8 w-1 h-1 rounded-full bg-border inline-block" />}
+                {i < (t("hero.techs", { returnObjects: true }) as string[]).length - 1 && <span className="ml-8 w-1 h-1 rounded-full bg-border inline-block" />}
               </span>
             ))}
           </motion.div>
@@ -244,7 +252,7 @@ export default function App() {
               return (
                 <motion.a key={project.id} href="#" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="group relative overflow-hidden rounded-2xl border border-white/5 bg-zinc-900/50 hover:border-[#62B2FE]/20 transition-all">
                   <div className="h-48 md:h-56 relative overflow-hidden">
-                    <img src={project.image} alt={label} className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity" />
+                    <img src={project.image} alt={label} loading="lazy" className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity" />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent" />
                     <div className="absolute bottom-4 left-5 right-5 flex items-center justify-between">
                       <span className="text-xs font-mono text-muted-foreground">{t("projects.featured")}</span>
@@ -303,7 +311,7 @@ export default function App() {
           <div className="grid md:grid-cols-3 gap-5">
             {(t("testimonials.items", { returnObjects: true }) as Array<{ quote: string; author: string; role: string }>).map((item, i) => (
               <motion.div key={item.author} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="relative p-8 rounded-2xl border border-white/5 bg-zinc-900/50 hover:border-[#62B2FE]/20 transition-all group">
-                <div className="w-8 h-8 mb-4 text-[#62B2FE]/30">"</div>
+                <div className="w-8 h-8 mb-4 text-[#62B2FE]/30" aria-hidden="true">"</div>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-6 italic">&ldquo;{item.quote}&rdquo;</p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#62B2FE] to-[#4A90D9] flex items-center justify-center text-white text-sm font-semibold">
@@ -368,10 +376,10 @@ export default function App() {
               <div className="space-y-4">
                 {[
                   { icon: Mail, label: "hello@example.com", href: "mailto:hello@example.com" },
-                  { icon: (props: { className?: string }) => <svg className={props.className || "w-5 h-5"} viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>, label: "github.com/username", href: "#" },
-                  { icon: (props: { className?: string }) => <svg className={props.className || "w-5 h-5"} viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>, label: "linkedin.com/in/username", href: "#" },
+                  { icon: GitHubIcon, label: "github.com/username", href: "#" },
+                  { icon: LinkedInIcon, label: "linkedin.com/in/username", href: "#" },
                 ].map((item) => (
-                  <a key={item.label} href={item.href} className="flex items-center gap-4 p-4 rounded-xl bg-background border border-white/10 hover:border-[#62B2FE]/20 transition-all group">
+                  <a key={item.label} href={item.href} aria-label={item.label} className="flex items-center gap-4 p-4 rounded-xl bg-background border border-white/10 hover:border-[#62B2FE]/20 transition-all group">
                     <div className="p-2.5 rounded-lg bg-[#62B2FE]/10 text-[#62B2FE] group-hover:bg-[#62B2FE]/20 transition-colors">
                       <item.icon className="w-5 h-5" />
                     </div>
@@ -392,12 +400,20 @@ export default function App() {
           <span className="font-display font-bold">&copy; 2025 {t("nav.logo")}</span>
           <span className="text-xs">{t("footer.builtWith")}</span>
           <div className="flex items-center gap-4">
-            <svg className="w-4 h-4 hover:text-[#62B2FE] transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            <svg className="w-4 h-4 hover:text-[#62B2FE] transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            <Mail className="w-4 h-4 hover:text-[#62B2FE] transition-colors" />
+            <a href="#" aria-label="GitHub"><GitHubIcon className="w-4 h-4 hover:text-[#62B2FE] transition-colors" /></a>
+            <a href="#" aria-label="LinkedIn"><LinkedInIcon className="w-4 h-4 hover:text-[#62B2FE] transition-colors" /></a>
+            <a href="mailto:hello@example.com" aria-label="Email"><Mail className="w-4 h-4 hover:text-[#62B2FE] transition-colors" /></a>
           </div>
         </div>
       </footer>
+
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        aria-label="Scroll to top"
+        className="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-[#62B2FE]/10 border border-[#62B2FE]/20 text-[#62B2FE] hover:bg-[#62B2FE]/20 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#62B2FE]"
+      >
+        <ArrowUp className="w-4 h-4" />
+      </button>
     </div>
   );
 }

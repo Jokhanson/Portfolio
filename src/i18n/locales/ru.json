@@ -55,7 +55,6 @@
     "builtWith": "Сделано на React, TypeScript, Tailwind и Motion"
   },
   "carousel": {
-    "liveSession": "Прямой эфир",
     "items": {
       "sustainable": { "label": "Экологично", "description": "Этичные ингредиенты от местных фермеров." },
       "community": { "label": "Сообщество", "description": "Создание прочных связей через общий опыт." },
