@@ -14,11 +14,31 @@ import { Footer } from "@/components/footer";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons";
 import type { FeatureItem } from "@/components/feature-carousel";
 
-const PROJECTS: FeatureItem[] = [
-  { id: "sustainable", icon: Pizza04Icon, image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=1200" },
-  { id: "community", icon: CommandFreeIcons, image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200" },
-  { id: "global", icon: GlobalSearchIcon, image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1200" },
-  { id: "award", icon: CheckmarkCircle01Icon, image: "https://images.unsplash.com/photo-1578574577315-3fbeb0cecdc2?q=80&w=1200" },
+const PROJECTS: (FeatureItem & { url: string })[] = [
+  {
+    id: "sustainable",
+    icon: Pizza04Icon,
+    image: "https://images.unsplash.com/photo-1554048612-b6a482bc67e5?q=80&w=1200",
+    url: "https://jokhanson.github.io/actual0102/index.html",
+  },
+  {
+    id: "community",
+    icon: CommandFreeIcons,
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200",
+    url: "https://jokhanson.github.io/hourlesson/",
+  },
+  {
+    id: "global",
+    icon: GlobalSearchIcon,
+    image: "https://images.unsplash.com/photo-1513207565459-7d1b1f0cf1b1?q=80&w=1200",
+    url: "https://jokhanson.github.io/Gift-Site/experimental/#/page/4iq4k0p8",
+  },
+  {
+    id: "award",
+    icon: CheckmarkCircle01Icon,
+    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200",
+    url: "https://jokhanson.github.io/PosingDemo/",
+  },
 ];
 
 export default function App() {
@@ -82,7 +102,7 @@ export default function App() {
               const label = t(`carousel.items.${project.id}.label`);
               const description = t(`carousel.items.${project.id}.description`);
               return (
-                <motion.a key={project.id} href="#" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="group relative overflow-hidden rounded-2xl border border-white/5 bg-zinc-900/50 hover:border-[#62B2FE]/20 transition-all">
+                <motion.a key={project.id} href={project.url} target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="group relative overflow-hidden rounded-2xl border border-white/5 bg-zinc-900/50 hover:border-[#62B2FE]/20 transition-all">
                   <div className="h-48 md:h-56 relative overflow-hidden">
                     <img src={project.image} alt={label} loading="lazy" className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity" />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent" />

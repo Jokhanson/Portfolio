@@ -56,16 +56,10 @@
   },
   "carousel": {
     "items": {
-      "sustainable": { "label": "1st Project", "description": "Sustainable sourcing platform connecting local farmers with consumers." },
-      "community": { "label": "2nd Project", "description": "Community-driven marketplace for shared experiences." },
-      "global": { "label": "3rd Project", "description": "Global network connecting visionaries across borders." },
-      "award": { "label": "4th Project", "description": "Award-winning design system for enterprise applications." },
-      "cloud": { "label": "5th Project", "description": "Cloud infrastructure dashboard with real-time monitoring." },
-      "mobile": { "label": "6th Project", "description": "Mobile-first banking app with biometric security." },
-      "analytics": { "label": "7th Project", "description": "Real-time analytics platform for data-driven decisions." },
-      "security": { "label": "8th Project", "description": "Zero-trust security framework for distributed systems." },
-      "magic": { "label": "9th Project", "description": "AI-powered automation tool for repetitive workflows." },
-      "local": { "label": "10th Project", "description": "Local business discovery engine with community reviews." }
+      "sustainable": { "label": "Frame by Frame", "description": "A photography portfolio for a family of photographers. Galleries, blog posts, and Telegram contact integration." },
+      "community": { "label": "Site in 1 Hour", "description": "Landing page and course platform teaching how to build websites with ChatGPT in under an hour." },
+      "global": { "label": "Gift Cards", "description": "Web app for creating personalized greeting cards with QR codes, photos, videos, and stickers." },
+      "award": { "label": "Posing Demo", "description": "A posing guide for photoshoots with categorized poses, tips, and favorites for models and photographers." }
     }
   }
 }
