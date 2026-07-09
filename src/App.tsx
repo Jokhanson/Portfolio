@@ -70,7 +70,7 @@ export default function App() {
         </div>
       </section>
 
-      <section id="projects" className="py-24 md:py-32 px-6 bg-zinc-900/20">
+      <section id="projects" className="py-24 md:py-32 px-6 bg-zinc-900/20 scroll-mt-20">
         <div className="max-w-6xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-16">
             <span className="text-[#62B2FE] text-sm font-mono tracking-widest">{t("projects.heading")}</span>
@@ -107,7 +107,7 @@ export default function App() {
         </div>
       </section>
 
-      <section id="experience" className="py-24 md:py-32 px-6">
+      <section id="experience" className="py-24 md:py-32 px-6 scroll-mt-20">
         <div className="max-w-6xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-16">
             <span className="text-[#62B2FE] text-sm font-mono tracking-widest">{t("experience.heading")}</span>
@@ -134,7 +134,7 @@ export default function App() {
         </div>
       </section>
 
-      <section id="testimonials" className="py-24 md:py-32 px-6 bg-zinc-900/20">
+      <section id="testimonials" className="py-24 md:py-32 px-6 bg-zinc-900/20 scroll-mt-20">
         <div className="max-w-6xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-16">
             <span className="text-[#62B2FE] text-sm font-mono tracking-widest">{t("testimonials.heading")}</span>
@@ -160,7 +160,7 @@ export default function App() {
         </div>
       </section>
 
-      <section id="contact" className="py-24 md:py-32 px-6">
+      <section id="contact" className="py-24 md:py-32 px-6 scroll-mt-20">
         <div className="max-w-6xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-16">
             <span className="text-[#62B2FE] text-sm font-mono tracking-widest">{t("contact.heading")}</span>
