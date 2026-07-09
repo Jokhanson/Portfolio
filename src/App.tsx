@@ -67,7 +67,7 @@ export default function App() {
             <span className="text-foreground">{t("hero.title1")}</span><br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#62B2FE] to-[#62B2FE]/60">{t("hero.title2")}</span>
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }} className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }} className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
             {t("hero.subtitle")}
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.45 }} className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -79,11 +79,11 @@ export default function App() {
               {t("hero.getInTouch")}
             </button>
           </motion.div>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.7 }} className="mt-20 flex items-center justify-center gap-8 text-xs text-muted-foreground font-mono">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.7 }} className="mt-20 flex items-center justify-center gap-4 md:gap-8 text-xs text-muted-foreground font-mono">
             {(t("hero.techs", { returnObjects: true }) as string[]).map((tech: string, i: number) => (
               <span key={tech}>
                 {tech}
-                {i < (t("hero.techs", { returnObjects: true }) as string[]).length - 1 && <span className="ml-8 w-1 h-1 rounded-full bg-border inline-block" />}
+                {i < (t("hero.techs", { returnObjects: true }) as string[]).length - 1 && <span className="ml-4 md:ml-8 w-1 h-1 rounded-full bg-border inline-block" />}
               </span>
             ))}
           </motion.div>
@@ -113,7 +113,7 @@ export default function App() {
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl font-semibold mb-2">{label}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{description}</p>
+                    <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-4">{description}</p>
                     <div className="flex flex-wrap gap-2">
                       {["React", "TypeScript", "Node.js"].map((tag) => (
                         <span key={tag} className="px-3 py-1 text-xs rounded-full bg-secondary/50 text-muted-foreground font-mono">{tag}</span>
@@ -142,10 +142,10 @@ export default function App() {
                     <div className="w-2.5 h-2.5 rounded-full bg-[#62B2FE] shadow-[0_0_10px_#62B2FE]" />
                   </div>
                   <div className="group p-6 rounded-2xl border border-white/5 bg-zinc-900/50 hover:border-[#62B2FE]/20 transition-all">
-                    <span className="text-xs font-mono text-[#62B2FE] tracking-wider">{item.period}</span>
+                    <span className="text-xs md:text-sm font-mono text-[#62B2FE] tracking-wider">{item.period}</span>
                     <h3 className="text-lg font-semibold mt-1">{item.role}</h3>
-                    <p className="text-sm text-muted-foreground mt-1 mb-2">{item.company}</p>
-                    <p className="text-sm text-muted-foreground/70 leading-relaxed">{item.desc}</p>
+                    <p className="text-sm md:text-base text-muted-foreground mt-1 mb-2">{item.company}</p>
+                    <p className="text-sm md:text-base text-muted-foreground/70 leading-relaxed">{item.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -164,7 +164,7 @@ export default function App() {
             {(t("testimonials.items", { returnObjects: true }) as Array<{ quote: string; author: string; role: string }>).map((item, i) => (
               <motion.div key={item.author} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="relative p-8 rounded-2xl border border-white/5 bg-zinc-900/50 hover:border-[#62B2FE]/20 transition-all group">
                 <div className="w-8 h-8 mb-4 text-[#62B2FE]/30" aria-hidden="true">&ldquo;</div>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-6 italic">&ldquo;{item.quote}&rdquo;</p>
+                <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6 italic">&ldquo;{item.quote}&rdquo;</p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#62B2FE] to-[#4A90D9] flex items-center justify-center text-white text-sm font-semibold">
                     {item.author.split(" ").map((n) => n[0]).join("")}
@@ -200,23 +200,23 @@ export default function App() {
                 if (!name || !email || !message) return;
                 window.location.href = `mailto:hello@example.com?subject=${encodeURIComponent(subject || "Portfolio Inquiry")}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
               }}>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="contact-name" className="sr-only">{t("contact.namePlaceholder")}</label>
-                    <input id="contact-name" name="name" required placeholder={t("contact.namePlaceholder")} className="w-full px-4 py-3 rounded-xl bg-background border border-white/10 text-sm focus:outline-none focus:border-[#62B2FE]/50 transition-colors" />
+                    <input id="contact-name" name="name" required placeholder={t("contact.namePlaceholder")} className="w-full px-4 py-3 rounded-xl bg-background border border-white/10 text-sm md:text-base focus:outline-none focus:border-[#62B2FE]/50 transition-colors" />
                   </div>
                   <div>
                     <label htmlFor="contact-email" className="sr-only">{t("contact.emailPlaceholder")}</label>
-                    <input id="contact-email" name="email" type="email" required placeholder={t("contact.emailPlaceholder")} className="w-full px-4 py-3 rounded-xl bg-background border border-white/10 text-sm focus:outline-none focus:border-[#62B2FE]/50 transition-colors" />
+                    <input id="contact-email" name="email" type="email" required placeholder={t("contact.emailPlaceholder")} className="w-full px-4 py-3 rounded-xl bg-background border border-white/10 text-sm md:text-base focus:outline-none focus:border-[#62B2FE]/50 transition-colors" />
                   </div>
                 </div>
                 <div>
                   <label htmlFor="contact-subject" className="sr-only">{t("contact.subjectPlaceholder")}</label>
-                  <input id="contact-subject" name="subject" placeholder={t("contact.subjectPlaceholder")} className="w-full px-4 py-3 rounded-xl bg-background border border-white/10 text-sm focus:outline-none focus:border-[#62B2FE]/50 transition-colors" />
+                  <input id="contact-subject" name="subject" placeholder={t("contact.subjectPlaceholder")} className="w-full px-4 py-3 rounded-xl bg-background border border-white/10 text-sm md:text-base focus:outline-none focus:border-[#62B2FE]/50 transition-colors" />
                 </div>
                 <div>
                   <label htmlFor="contact-message" className="sr-only">{t("contact.messagePlaceholder")}</label>
-                  <textarea id="contact-message" name="message" required rows={5} placeholder={t("contact.messagePlaceholder")} className="w-full px-4 py-3 rounded-xl bg-background border border-white/10 text-sm focus:outline-none focus:border-[#62B2FE]/50 transition-colors resize-none" />
+                  <textarea id="contact-message" name="message" required rows={5} placeholder={t("contact.messagePlaceholder")} className="w-full px-4 py-3 rounded-xl bg-background border border-white/10 text-sm md:text-base focus:outline-none focus:border-[#62B2FE]/50 transition-colors resize-none" />
                 </div>
                 <button type="submit" className="inline-flex items-center gap-2 px-6 py-3 bg-[#62B2FE] text-white rounded-xl text-sm font-medium hover:bg-[#62B2FE]/90 transition-all">
                   {t("contact.sendButton")} <Send className="w-4 h-4" />
@@ -235,7 +235,7 @@ export default function App() {
                     <div className="p-2.5 rounded-lg bg-[#62B2FE]/10 text-[#62B2FE] group-hover:bg-[#62B2FE]/20 transition-colors">
                       <item.icon className="w-5 h-5" />
                     </div>
-                    <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">{item.label}</span>
+                    <span className="text-sm md:text-base text-muted-foreground group-hover:text-foreground transition-colors">{item.label}</span>
                   </a>
                 ))}
               </div>
