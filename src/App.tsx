@@ -192,7 +192,6 @@ export default function App() {
           className="absolute inset-0 w-full h-full"
           colors={["#0A0A0F", "#14141E", "#1C1C2E", "#62B2FE"]}
           speed={0.6}
-          backgroundColor="#0A0A0F"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background pointer-events-none" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
@@ -219,7 +218,7 @@ export default function App() {
             </button>
           </motion.div>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.7 }} className="mt-20 flex items-center justify-center gap-8 text-xs text-muted-foreground font-mono">
-            {t<string[], "hero.techs">("hero.techs", { returnObjects: true }).map((tech: string, i: number, arr: string[]) => (
+            {(t("hero.techs", { returnObjects: true }) as string[]).map((tech: string, i: number, arr: string[]) => (
               <span key={tech}>
                 {tech}
                 {i < arr.length - 1 && <span className="ml-8 w-1 h-1 rounded-full bg-border inline-block" />}
@@ -275,7 +274,7 @@ export default function App() {
           <div className="relative">
             <div className="absolute left-[19px] top-0 bottom-0 w-px bg-border" />
             <div className="space-y-8">
-              {t<string[], "experience.items">("experience.items", { returnObjects: true }).map((item: { period: string; role: string; company: string; desc: string }, i: number) => (
+              {(t("experience.items", { returnObjects: true }) as Array<{ period: string; role: string; company: string; desc: string }>).map((item, i) => (
                 <motion.div key={item.period} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.15 }} className="relative pl-14">
                   <div className="absolute left-3 top-1.5 w-8 h-8 rounded-full bg-[#62B2FE]/10 border border-[#62B2FE]/30 flex items-center justify-center">
                     <div className="w-2.5 h-2.5 rounded-full bg-[#62B2FE] shadow-[0_0_10px_#62B2FE]" />
@@ -300,7 +299,7 @@ export default function App() {
             <h2 className="text-3xl md:text-5xl font-display font-bold mt-3">{t("testimonials.title")}</h2>
           </motion.div>
           <div className="grid md:grid-cols-3 gap-5">
-            {t<string[], "testimonials.items">("testimonials.items", { returnObjects: true }).map((item: { quote: string; author: string; role: string }, i: number) => (
+            {(t("testimonials.items", { returnObjects: true }) as Array<{ quote: string; author: string; role: string }>).map((item, i) => (
               <motion.div key={item.author} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="relative p-8 rounded-2xl border border-white/5 bg-zinc-900/50 hover:border-[#62B2FE]/20 transition-all group">
                 <div className="w-8 h-8 mb-4 text-[#62B2FE]/30">"</div>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-6 italic">&ldquo;{item.quote}&rdquo;</p>
