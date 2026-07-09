@@ -177,9 +177,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <a href="#main-content" className="fixed left-4 top-4 z-[60] -translate-y-full focus:translate-y-0 transition-transform bg-[#62B2FE] text-white px-4 py-2 rounded-lg text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#62B2FE]">
-        Skip to content
-      </a>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0F]/60 backdrop-blur-2xl border-b border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.3)]">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <span className="font-display text-lg font-bold tracking-tight">{t("nav.logo")}</span>
