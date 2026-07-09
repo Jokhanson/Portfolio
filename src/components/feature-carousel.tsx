@@ -118,6 +118,7 @@ export function FeatureCarousel({ items }: { items: FeatureItem[] }) {
                   className="absolute inset-0 rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border-4 border-background bg-background origin-center"
                 >
                   <img src={feature.image} alt={label} loading="lazy" className="w-full h-full object-cover transition-all duration-700" />
+                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none" />
                   <AnimatePresence>
                     {isActive && (
                       <motion.div
