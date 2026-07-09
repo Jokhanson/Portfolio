@@ -1,3 +1,4 @@
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { motion } from "motion/react";
 import {
   Pizza04Icon,
@@ -46,7 +47,18 @@ export default function App() {
   const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <HelmetProvider>
+      <Helmet>
+        <title>Portfolio — Full-Stack Developer</title>
+        <meta name="description" content="Full-stack developer and designer crafting premium digital products with meticulous attention to detail and user experience." />
+        <meta property="og:title" content="Portfolio — Full-Stack Developer" />
+        <meta property="og:description" content="Full-stack developer and designer crafting premium digital products with meticulous attention to detail and user experience." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Portfolio — Full-Stack Developer" />
+        <meta name="twitter:description" content="Full-stack developer and designer crafting premium digital products with meticulous attention to detail and user experience." />
+      </Helmet>
+      <div className="min-h-screen bg-background text-foreground">
       <Nav scrollTo={scrollTo} />
 
       <section id="main-content" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
@@ -103,8 +115,11 @@ export default function App() {
               const description = t(`carousel.items.${project.id}.description`);
               return (
                 <motion.a key={project.id} href={project.url} target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="group relative overflow-hidden rounded-2xl border border-white/5 bg-zinc-900/50 hover:border-[#62B2FE]/20 transition-all">
-                  <div className="h-48 md:h-56 relative overflow-hidden">
-                    <img src={project.image} alt={label} loading="lazy" className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity" />
+                    <div className="h-48 md:h-56 relative overflow-hidden">
+                    <picture>
+                      <source srcSet={`${project.image}.webp`} type="image/webp" />
+                      <img src={project.image} alt={label} loading="lazy" className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity" />
+                    </picture>
                     <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent" />
                     <div className="absolute bottom-4 left-5 right-5 flex items-center justify-between">
                       <span className="text-xs font-mono text-muted-foreground">{t("projects.featured")}</span>
@@ -257,5 +272,6 @@ export default function App() {
         <ArrowUp className="w-4 h-4" />
       </button>
     </div>
+    </HelmetProvider>
   );
 }

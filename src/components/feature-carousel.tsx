@@ -1,6 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { Pizza04Icon } from "@hugeicons/core-free-icons";
 
@@ -12,6 +13,7 @@ export type FeatureItem = {
 
 const AUTO_PLAY_INTERVAL = 3000;
 const ITEM_HEIGHT = 80;
+const SWIPE_THRESHOLD = 50;
 
 function wrap(min: number, max: number, v: number) {
   const rangeSize = max - min;
@@ -22,9 +24,12 @@ export function FeatureCarousel({ items }: { items: FeatureItem[] }) {
   const { t } = useTranslation();
   const [step, setStep] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const touchStartX = useRef(0);
+  const containerRef = useRef<HTMLDivElement>(null);
   const currentIndex = ((step % items.length) + items.length) % items.length;
 
   const nextStep = useCallback(() => setStep((p) => p + 1), []);
+  const prevStep = useCallback(() => setStep((p) => p - 1), []);
 
   const handleChipClick = (index: number) => {
     const diff = index - currentIndex;
@@ -33,6 +38,29 @@ export function FeatureCarousel({ items }: { items: FeatureItem[] }) {
       ? (diff <= len / 2 ? diff : diff - len)
       : (-diff <= len / 2 ? diff : diff + len);
     if (shortest !== 0) setStep((s) => s + shortest);
+  };
+
+  const handleDotClick = (index: number) => {
+    const diff = index - currentIndex;
+    const len = items.length;
+    const shortest = diff > 0
+      ? (diff <= len / 2 ? diff : diff - len)
+      : (-diff <= len / 2 ? diff : diff + len);
+    if (shortest !== 0) setStep((s) => s + shortest);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    setIsPaused(true);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > SWIPE_THRESHOLD) {
+      if (diff > 0) nextStep();
+      else prevStep();
+    }
+    setIsPaused(false);
   };
 
   useEffect(() => {
@@ -93,7 +121,12 @@ export function FeatureCarousel({ items }: { items: FeatureItem[] }) {
           </div>
         </div>
 
-        <div className="flex-1 min-h-[400px] lg:h-full bg-zinc-900/50 flex items-center justify-center py-12 px-6 overflow-hidden border-t lg:border-t-0 lg:border-l border-white/10">
+        <div
+          ref={containerRef}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="relative flex-1 min-h-[400px] lg:h-full bg-zinc-900/50 flex flex-col items-center justify-center py-12 px-6 border-t lg:border-t-0 lg:border-l border-white/10 select-none"
+        >
           <div className="relative w-full max-w-[380px] aspect-[4/5] flex items-center justify-center">
             {items.map((feature, index) => {
               const status = getCardStatus(index);
@@ -117,7 +150,10 @@ export function FeatureCarousel({ items }: { items: FeatureItem[] }) {
                   transition={{ type: "spring", stiffness: 260, damping: 25, mass: 0.8 }}
                   className="absolute inset-0 rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border-4 border-background bg-background origin-center"
                 >
-                  <img src={feature.image} alt={label} loading="lazy" className="w-full h-full object-cover transition-all duration-700" />
+                  <picture>
+                    <source srcSet={`${feature.image}.webp`} type="image/webp" />
+                    <img src={feature.image} alt={label} loading="lazy" className="w-full h-full object-cover transition-all duration-700" />
+                  </picture>
                   <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
                   <AnimatePresence>
                     {isActive && (
@@ -140,6 +176,42 @@ export function FeatureCarousel({ items }: { items: FeatureItem[] }) {
               );
             })}
           </div>
+
+          <div className="flex items-center justify-center gap-3 mt-6">
+            {items.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => handleDotClick(index)}
+                aria-label={`Go to slide ${index + 1}`}
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex
+                    ? "bg-[#62B2FE] w-6"
+                    : "bg-white/20 hover:bg-white/40"
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={prevStep}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            aria-label="Previous slide"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 transition-all opacity-60 hover:opacity-100"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={nextStep}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            aria-label="Next slide"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 transition-all opacity-60 hover:opacity-100"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
         </div>
       </div>
     </div>
