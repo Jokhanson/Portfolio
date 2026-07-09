@@ -11,7 +11,7 @@ export type FeatureItem = {
 };
 
 const AUTO_PLAY_INTERVAL = 3000;
-const ITEM_HEIGHT = 65;
+const ITEM_HEIGHT = 80;
 
 function wrap(min: number, max: number, v: number) {
   const rangeSize = max - min;
@@ -57,8 +57,8 @@ export function FeatureCarousel({ items }: { items: FeatureItem[] }) {
     <div id="projects-carousel" className="w-full max-w-7xl mx-auto scroll-mt-20">
       <div className="relative overflow-hidden rounded-[1.5rem] lg:rounded-[3rem] flex flex-col lg:flex-row min-h-[500px] lg:aspect-video border border-white/10">
         <div className="w-full lg:w-[40%] min-h-[300px] lg:h-full relative z-30 flex flex-col items-start justify-center overflow-hidden px-6 md:px-12 lg:pl-14 bg-[#62B2FE]">
-          <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-[#62B2FE] via-[#62B2FE]/80 to-transparent z-40 pointer-events-none" />
-          <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#62B2FE] via-[#62B2FE]/80 to-transparent z-40 pointer-events-none" />
+          <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#62B2FE] via-[#62B2FE]/80 to-transparent z-40 pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#62B2FE] via-[#62B2FE]/80 to-transparent z-40 pointer-events-none" />
           <div className="relative w-full h-full flex items-center justify-center lg:justify-start z-20">
             {items.map((feature, index) => {
               const distance = index - currentIndex;
@@ -76,14 +76,14 @@ export function FeatureCarousel({ items }: { items: FeatureItem[] }) {
                     onClick={() => handleChipClick(index)}
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}
-                    className={`relative flex items-center gap-3 px-5 py-2.5 rounded-full transition-all duration-700 text-left border text-sm ${
+                    className={`relative flex items-center gap-4 px-6 py-3 rounded-full transition-all duration-700 text-left border text-base font-medium ${
                       index === currentIndex
-                        ? "bg-white text-[#62B2FE] border-white z-10"
+                        ? "bg-white text-[#62B2FE] border-white z-10 shadow-lg"
                         : "bg-transparent text-white/60 border-white/20 hover:border-white/40 hover:text-white"
                     }`}
                   >
                     <div className={index === currentIndex ? "text-[#62B2FE]" : "text-white/40"}>
-                      <HugeiconsIcon icon={feature.icon} size={16} strokeWidth={2} />
+                      <HugeiconsIcon icon={feature.icon} size={20} strokeWidth={2} />
                     </div>
                     <span className="font-normal whitespace-nowrap">{label}</span>
                   </button>
