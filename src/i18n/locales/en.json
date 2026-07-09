@@ -1,0 +1,72 @@
+{
+  "nav": {
+    "logo": "Portfolio",
+    "projects": "Projects",
+    "experience": "Experience",
+    "testimonials": "Testimonials",
+    "contact": "Contact",
+    "getInTouch": "Get in Touch"
+  },
+  "hero": {
+    "available": "Available for work",
+    "title1": "Creating Digital",
+    "title2": "Experiences",
+    "subtitle": "Full-stack developer and designer crafting premium digital products with meticulous attention to detail and user experience.",
+    "viewProjects": "View Projects",
+    "getInTouch": "Get in Touch",
+    "techs": ["React", "TypeScript", "Design", "Innovation"]
+  },
+  "projects": {
+    "heading": "01 / PROJECTS",
+    "title": "Featured Work",
+    "featured": "Featured Project"
+  },
+  "experience": {
+    "heading": "02 / EXPERIENCE",
+    "title": "Career Timeline",
+    "items": [
+      { "period": "2024 — Present", "role": "Senior Frontend Engineer", "company": "TechCorp", "desc": "Leading frontend architecture, implementing design system, mentoring juniors." },
+      { "period": "2022 — 2024", "role": "UI/UX Engineer", "company": "DesignLab", "desc": "Built premium interfaces for 10+ clients. Pixel-perfect from Figma to prod." },
+      { "period": "2020 — 2022", "role": "Junior Developer", "company": "StartupXYZ", "desc": "Full-stack development. Built core product features from scratch." }
+    ]
+  },
+  "testimonials": {
+    "heading": "03 / TESTIMONIALS",
+    "title": "What People Say",
+    "items": [
+      { "quote": "An exceptional developer with a keen eye for design. Delivered beyond expectations, every time.", "author": "Alex Johnson", "role": "CTO, TechCorp" },
+      { "quote": "Working with them was a breeze. The quality and attention to detail is simply outstanding.", "author": "Maria Petrova", "role": "PM, DesignLab" },
+      { "quote": "They brought our vision to life with elegance and precision. A true professional.", "author": "James Chen", "role": "Founder, StartupXYZ" }
+    ]
+  },
+  "contact": {
+    "heading": "04 / CONTACT",
+    "title": "Let's Work Together",
+    "sendMessage": "Send a Message",
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "Email",
+    "subjectPlaceholder": "Subject",
+    "messagePlaceholder": "Message",
+    "sendButton": "Send Message",
+    "connect": "Connect",
+    "availability": "Currently available for freelance and full-time opportunities. Let's build something great together."
+  },
+  "footer": {
+    "builtWith": "Built with React, TypeScript, Tailwind & Motion"
+  },
+  "carousel": {
+    "liveSession": "Live Session",
+    "items": {
+      "sustainable": { "label": "1-st Case", "description": "Description of 1-st case" },
+      "community": { "label": "2-nd Case", "description": "Description of 2-nd case" },
+      "global": { "label": "3-rd Case", "description": "Description of 3-rd" },
+      "award": { "label": "4-th Case", "description": "Description of 4-th case" },
+      "cloud": { "label": "5-th Case", "description": "Description of 5-th case" },
+      "mobile": { "label": "6-th Case", "description": "Description of 6-th case" },
+      "analytics": { "label": "7-th Case", "description": "Description of 7-th case" },
+      "security": { "label": "8-th Case", "description": "Description of 8-th case" },
+      "magic": { "label": "9-th Case", "description": "Description of 9-th case" },
+      "local": { "label": "10-th Case", "description": "Description of 10-th case" }
+    }
+  }
+}

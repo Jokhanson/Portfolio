@@ -1,0 +1,72 @@
+{
+  "nav": {
+    "logo": "Портфолио",
+    "projects": "Проекты",
+    "experience": "Опыт",
+    "testimonials": "Отзывы",
+    "contact": "Контакты",
+    "getInTouch": "Связаться"
+  },
+  "hero": {
+    "available": "Открыт к предложениям",
+    "title1": "Создаю цифровые",
+    "title2": "Проекты",
+    "subtitle": "Full-stack разработчик и дизайнер, создаю премиальные цифровые продукты с вниманием к каждой детали и пользовательскому опыту.",
+    "viewProjects": "Смотреть проекты",
+    "getInTouch": "Написать",
+    "techs": ["React", "TypeScript", "Дизайн", "Инновации"]
+  },
+  "projects": {
+    "heading": "01 / ПРОЕКТЫ",
+    "title": "Избранные работы",
+    "featured": "Избранный проект"
+  },
+  "experience": {
+    "heading": "02 / ОПЫТ",
+    "title": "Карьерный путь",
+    "items": [
+      { "period": "2024 — наст.", "role": "Senior Frontend Engineer", "company": "TechCorp", "desc": "Веду фронтенд-архитектуру, внедряю дизайн-систему, наставляю джуниоров." },
+      { "period": "2022 — 2024", "role": "UI/UX Engineer", "company": "DesignLab", "desc": "Создавал премиальные интерфейсы для 10+ клиентов. Figma → prod pixel-perfect." },
+      { "period": "2020 — 2022", "role": "Junior Developer", "company": "StartupXYZ", "desc": "Полный цикл разработки. Создал ключевые функции продукта с нуля." }
+    ]
+  },
+  "testimonials": {
+    "heading": "03 / ОТЗЫВЫ",
+    "title": "Что говорят люди",
+    "items": [
+      { "quote": "Исключительный разработчик с острым чувством дизайна. Всегда превышает ожидания.", "author": "Алексей Иванов", "role": "CTO, TechCorp" },
+      { "quote": "Работать с ним — одно удовольствие. Качество и внимание к деталям просто выдающиеся.", "author": "Мария Петрова", "role": "PM, DesignLab" },
+      { "quote": "Оживил наше видение с элегантностью и точностью. Настоящий профессионал.", "author": "Джеймс Чен", "role": "Основатель, StartupXYZ" }
+    ]
+  },
+  "contact": {
+    "heading": "04 / КОНТАКТЫ",
+    "title": "Давайте работать вместе",
+    "sendMessage": "Отправить сообщение",
+    "namePlaceholder": "Имя",
+    "emailPlaceholder": "Email",
+    "subjectPlaceholder": "Тема",
+    "messagePlaceholder": "Сообщение",
+    "sendButton": "Отправить",
+    "connect": "Связь",
+    "availability": "Открыт к фрилансу и полной занятости. Давайте создадим что-то великое вместе."
+  },
+  "footer": {
+    "builtWith": "Сделано на React, TypeScript, Tailwind и Motion"
+  },
+  "carousel": {
+    "liveSession": "Прямой эфир",
+    "items": {
+      "sustainable": { "label": "Экологично", "description": "Этичные ингредиенты от местных фермеров." },
+      "community": { "label": "Сообщество", "description": "Создание прочных связей через общий опыт." },
+      "global": { "label": "Глобальный охват", "description": "Объединяем vision-сообщества по всему миру." },
+      "award": { "label": "Награды", "description": "Признанное мастерство в дизайне и инновациях." },
+      "cloud": { "label": "Облака", "description": "Масштабируйте инфраструктуру без усилий." },
+      "mobile": { "label": "Мобайл", "description": "Первоклассный опыт на любом устройстве." },
+      "analytics": { "label": "Аналитика", "description": "Инсайты в реальном времени." },
+      "security": { "label": "Безопасность", "description": "Протоколы банковского уровня для ваших данных." },
+      "magic": { "label": "Автоматизация", "description": "Пусть ИИ возьмёт рутину на себя." },
+      "local": { "label": "Локальное", "description": "Поддержка местного бизнеса и создателей." }
+    }
+  }
+}
