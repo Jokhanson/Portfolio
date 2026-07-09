@@ -29,7 +29,9 @@ const FEATURES_DATA = [
   { id: "local", icon: CheckmarkCircle01Icon, image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=1200" },
 ];
 
-const CAROUSEL_ITEMS_TO_SHOW = ["sustainable", "community", "global", "award"];
+const CAROUSEL_ITEMS_TO_SHOW = FEATURES_DATA.filter((f) =>
+  ["sustainable", "community", "global", "award"].includes(f.id)
+);
 
 const AUTO_PLAY_INTERVAL = 3000;
 const ITEM_HEIGHT = 65;
@@ -39,16 +41,16 @@ function wrap(min: number, max: number, v: number) {
   return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
 }
 
-function FeatureCarousel() {
+function FeatureCarousel({ items }: { items: typeof FEATURES_DATA }) {
   const { t } = useTranslation();
   const [step, setStep] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const currentIndex = ((step % FEATURES_DATA.length) + FEATURES_DATA.length) % FEATURES_DATA.length;
+  const currentIndex = ((step % items.length) + items.length) % items.length;
 
   const nextStep = useCallback(() => setStep((p) => p + 1), []);
 
   const handleChipClick = (index: number) => {
-    const diff = (index - currentIndex + FEATURES_DATA.length) % FEATURES_DATA.length;
+    const diff = (index - currentIndex + items.length) % items.length;
     if (diff > 0) setStep((s) => s + diff);
   };
 
@@ -60,7 +62,7 @@ function FeatureCarousel() {
 
   const getCardStatus = (index: number) => {
     const diff = index - currentIndex;
-    const len = FEATURES_DATA.length;
+    const len = items.length;
     let nd = diff;
     if (diff > len / 2) nd -= len;
     if (diff < -len / 2) nd += len;
@@ -74,12 +76,12 @@ function FeatureCarousel() {
     <div className="w-full max-w-7xl mx-auto md:p-0">
       <div className="relative overflow-hidden rounded-[1.5rem] lg:rounded-[3rem] flex flex-col lg:flex-row min-h-[500px] lg:aspect-video border border-white/10">
         <div className="w-full lg:w-[40%] min-h-[300px] lg:h-full relative z-30 flex flex-col items-start justify-center overflow-hidden px-6 md:px-12 lg:pl-14 bg-[#62B2FE]">
-          <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-[#62B2FE] via-[#62B2FE]/80 to-transparent z-40" />
-          <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#62B2FE] via-[#62B2FE]/80 to-transparent z-40" />
+          <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-[#62B2FE] via-[#62B2FE]/80 to-transparent z-40 pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#62B2FE] via-[#62B2FE]/80 to-transparent z-40 pointer-events-none" />
           <div className="relative w-full h-full flex items-center justify-center lg:justify-start z-20">
-            {FEATURES_DATA.map((feature, index) => {
+            {items.map((feature, index) => {
               const distance = index - currentIndex;
-              const wrappedDistance = wrap(-(FEATURES_DATA.length / 2), FEATURES_DATA.length / 2, distance);
+              const wrappedDistance = wrap(-(items.length / 2), items.length / 2, distance);
               const label = t(`carousel.items.${feature.id}.label`);
               return (
                 <motion.div
@@ -112,7 +114,7 @@ function FeatureCarousel() {
 
         <div className="flex-1 min-h-[400px] lg:h-full bg-zinc-900/50 flex items-center justify-center py-12 px-6 overflow-hidden border-t lg:border-t-0 lg:border-l border-white/10">
           <div className="relative w-full max-w-[380px] aspect-[4/5] flex items-center justify-center">
-            {FEATURES_DATA.map((feature, index) => {
+            {items.map((feature, index) => {
               const status = getCardStatus(index);
               const isActive = status === "active";
               const isPrev = status === "prev";
@@ -234,9 +236,9 @@ export default function App() {
             <span className="text-[#62B2FE] text-sm font-mono tracking-widest">{t("projects.heading")}</span>
             <h2 className="text-3xl md:text-5xl font-display font-bold mt-3">{t("projects.title")}</h2>
           </motion.div>
-          <FeatureCarousel />
+          <FeatureCarousel items={CAROUSEL_ITEMS_TO_SHOW} />
           <div className="grid md:grid-cols-2 gap-5 mt-12">
-            {FEATURES_DATA.filter((f) => CAROUSEL_ITEMS_TO_SHOW.includes(f.id)).map((project, i) => {
+            {CAROUSEL_ITEMS_TO_SHOW.map((project, i) => {
               const label = t(`carousel.items.${project.id}.label`);
               const description = t(`carousel.items.${project.id}.description`);
               return (
@@ -327,13 +329,35 @@ export default function App() {
           <div className="grid md:grid-cols-2 gap-8">
             <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="p-8 rounded-2xl border border-white/5 bg-zinc-900/50">
               <h3 className="text-xl font-semibold mb-6">{t("contact.sendMessage")}</h3>
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-4" onSubmit={(e) => {
+                e.preventDefault();
+                const form = e.currentTarget;
+                const data = new FormData(form);
+                const name = data.get("name")?.toString().trim();
+                const email = data.get("email")?.toString().trim();
+                const subject = data.get("subject")?.toString().trim();
+                const message = data.get("message")?.toString().trim();
+                if (!name || !email || !message) return;
+                window.location.href = `mailto:hello@example.com?subject=${encodeURIComponent(subject || "Portfolio Inquiry")}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
+              }}>
                 <div className="grid grid-cols-2 gap-4">
-                  <input placeholder={t("contact.namePlaceholder")} className="w-full px-4 py-3 rounded-xl bg-background border border-white/10 text-sm focus:outline-none focus:border-[#62B2FE]/50 transition-colors" />
-                  <input placeholder={t("contact.emailPlaceholder")} type="email" className="w-full px-4 py-3 rounded-xl bg-background border border-white/10 text-sm focus:outline-none focus:border-[#62B2FE]/50 transition-colors" />
+                  <div>
+                    <label htmlFor="contact-name" className="sr-only">{t("contact.namePlaceholder")}</label>
+                    <input id="contact-name" name="name" required placeholder={t("contact.namePlaceholder")} className="w-full px-4 py-3 rounded-xl bg-background border border-white/10 text-sm focus:outline-none focus:border-[#62B2FE]/50 transition-colors" />
+                  </div>
+                  <div>
+                    <label htmlFor="contact-email" className="sr-only">{t("contact.emailPlaceholder")}</label>
+                    <input id="contact-email" name="email" type="email" required placeholder={t("contact.emailPlaceholder")} className="w-full px-4 py-3 rounded-xl bg-background border border-white/10 text-sm focus:outline-none focus:border-[#62B2FE]/50 transition-colors" />
+                  </div>
                 </div>
-                <input placeholder={t("contact.subjectPlaceholder")} className="w-full px-4 py-3 rounded-xl bg-background border border-white/10 text-sm focus:outline-none focus:border-[#62B2FE]/50 transition-colors" />
-                <textarea placeholder={t("contact.messagePlaceholder")} rows={5} className="w-full px-4 py-3 rounded-xl bg-background border border-white/10 text-sm focus:outline-none focus:border-[#62B2FE]/50 transition-colors resize-none" />
+                <div>
+                  <label htmlFor="contact-subject" className="sr-only">{t("contact.subjectPlaceholder")}</label>
+                  <input id="contact-subject" name="subject" placeholder={t("contact.subjectPlaceholder")} className="w-full px-4 py-3 rounded-xl bg-background border border-white/10 text-sm focus:outline-none focus:border-[#62B2FE]/50 transition-colors" />
+                </div>
+                <div>
+                  <label htmlFor="contact-message" className="sr-only">{t("contact.messagePlaceholder")}</label>
+                  <textarea id="contact-message" name="message" required rows={5} placeholder={t("contact.messagePlaceholder")} className="w-full px-4 py-3 rounded-xl bg-background border border-white/10 text-sm focus:outline-none focus:border-[#62B2FE]/50 transition-colors resize-none" />
+                </div>
                 <button type="submit" className="inline-flex items-center gap-2 px-6 py-3 bg-[#62B2FE] text-white rounded-xl text-sm font-medium hover:bg-[#62B2FE]/90 transition-all">
                   {t("contact.sendButton")} <Send className="w-4 h-4" />
                 </button>
