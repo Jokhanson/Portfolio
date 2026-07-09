@@ -203,9 +203,21 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background pointer-events-none" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#62B2FE]/10 border border-[#62B2FE]/20 text-[#62B2FE] text-sm font-mono mb-8">
-              <span className="w-2 h-2 rounded-full bg-[#62B2FE] shadow-[0_0_8px_#62B2FE]" aria-hidden="true" />
-              {t("hero.available")}
+            <svg style={{ position: "absolute", width: 0, height: 0 }}>
+              <filter id="frosted">
+                <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G" />
+              </filter>
+            </svg>
+            <div className="relative px-6 py-3 rounded-full text-sm font-mono mb-8 text-white cursor-pointer select-none"
+              style={{
+                background: "rgba(255,255,255,0.08)",
+                border: "2px solid rgba(255,255,255,0.6)",
+                backdropFilter: "url(#frosted)",
+                WebkitBackdropFilter: "url(#frosted)",
+              }}>
+              <span className="w-2 h-2 rounded-full bg-white shadow-[0_0_8px_white] inline-block mr-2 align-middle" aria-hidden="true" />
+              <span className="align-middle">{t("hero.available")}</span>
             </div>
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15 }} className="text-5xl md:text-7xl lg:text-8xl font-display font-bold tracking-tight mb-6">
