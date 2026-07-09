@@ -54,7 +54,7 @@ export function FeatureCarousel({ items }: { items: FeatureItem[] }) {
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto">
+    <div id="projects-carousel" className="w-full max-w-7xl mx-auto scroll-mt-20">
       <div className="relative overflow-hidden rounded-[1.5rem] lg:rounded-[3rem] flex flex-col lg:flex-row min-h-[500px] lg:aspect-video border border-white/10">
         <div className="w-full lg:w-[40%] min-h-[300px] lg:h-full relative z-30 flex flex-col items-start justify-center overflow-hidden px-6 md:px-12 lg:pl-14 bg-[#62B2FE]">
           <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-[#62B2FE] via-[#62B2FE]/80 to-transparent z-40 pointer-events-none" />

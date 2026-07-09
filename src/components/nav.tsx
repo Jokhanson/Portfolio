@@ -1,7 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { LanguageToggle } from "@/components/language-toggle";
 
-const navItems = ["projects", "experience", "testimonials", "contact"];
+const navItems: [string, string][] = [
+  ["projects", "projects-carousel"],
+  ["experience", "experience"],
+  ["testimonials", "testimonials"],
+  ["contact", "contact"],
+];
 
 export function Nav({ scrollTo }: { scrollTo: (id: string) => void }) {
   const { t } = useTranslation();
@@ -11,13 +16,13 @@ export function Nav({ scrollTo }: { scrollTo: (id: string) => void }) {
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <span className="font-display text-lg font-bold tracking-tight">{t("nav.logo")}</span>
         <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
-          {navItems.map((item) => (
+          {navItems.map(([key, id]) => (
             <button
-              key={item}
-              onClick={() => scrollTo(item)}
+              key={key}
+              onClick={() => scrollTo(id)}
               className="hover:text-foreground transition-colors capitalize focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#62B2FE] focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded"
             >
-              {t(`nav.${item}`)}
+              {t(`nav.${key}`)}
             </button>
           ))}
         </div>
