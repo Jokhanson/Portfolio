@@ -69,7 +69,7 @@ export function Nav({ scrollTo }: { scrollTo: (id: string) => void }) {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed top-0 right-0 bottom-0 w-[280px] z-50 bg-[#0A0A0F] border-l border-white/[0.12] shadow-[-8px_0_30px_rgba(0,0,0,0.5)] flex flex-col md:hidden"
+              className="fixed top-0 right-0 bottom-0 w-[280px] z-50 bg-[#0A0A0F]/80 backdrop-blur-2xl border-l border-white/[0.08] shadow-[-8px_0_30px_rgba(0,0,0,0.5)] flex flex-col md:hidden"
             >
               <div className="flex items-center justify-between px-6 h-16 border-b border-white/[0.08]">
                 <span className="font-display font-bold text-foreground">{t("nav.logo")}</span>
